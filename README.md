@@ -101,9 +101,9 @@ is stored in the folder:
     
     (2) High-level training in a large cluster of 729 nodes:
     ```
-    $ ./RunHighLevelTrainingLarge.sh 1000
-    $ ./RunHighLevelTrainingLarge.sh 2000
-    $ ./RunHighLevelTrainingLarge.sh 3000
+    $ ./shell/RunHighLevelTrainingLarge.sh 1000
+    $ ./shell/RunHighLevelTrainingLarge.sh 2000
+    $ ./shell/RunHighLevelTrainingLarge.sh 3000
     ```
     Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
     ```
@@ -157,7 +157,7 @@ Medea is implemented using Matlab, due to its outstanding performance in solving
 
     ```
     $ cd testbed
-    $ ./GenerateInterference.sh
+    $ ./shell/GenerateInterference.sh
     $ ls
     ```
     
