@@ -30,7 +30,7 @@ pip install -r requirement.txt
 ## Content
 
 Our project includes three parts: 
-1. [Real-World LRA cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments/Real-World%20cluster): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
+1. [Real-World LRA cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Real-World%20cluster): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
 2. [Experiments](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments): Metis scheduling workflow based on our real-wrold LRA setting.
 
 # Experiment workflow
