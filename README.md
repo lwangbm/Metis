@@ -15,6 +15,7 @@ This repository contains the tensorflow implementation for reinforcement learnin
 5. pandas
 6. matplotlib
 7. sklearn
+8. Matlab 2019b or above
 
 ## Installation
 ### Install Requirements
@@ -29,17 +30,17 @@ pip install -r requirement.txt
 ## Content
 
 Our project includes three parts: 
-1. [Real-World LRA cluster](https://github.com/George-RL-based-container-sche/George/tree/master/testbed): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
-2. [Experiments](https://github.com/George-RL-based-container-sche/George/tree/master/testbed): George scheduling workflow based on our real-wrold LRA setting.
+1. [Real-World LRA cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments/testbed): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
+2. [Experiments](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments): Metis scheduling workflow based on our real-wrold LRA setting.
 
 # Experiment workflow
 
 ## Real-World LRA cluster setup and profiler establishment
 
 
-## George: RL model training for the real-world LRA cluster
+## Metis: RL model training for the real-world LRA cluster
 
-1. First check the data collected by [Real-World LRA cluster](https://github.com/George-RL-based-container-sche/George/tree/master/testbed) 
+1. First check the data collected by [Real-World LRA cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/testbed) 
 is stored in the folder:
 
     ```
@@ -59,10 +60,10 @@ is stored in the folder:
     batch_set_cpo_27node_100.csv batch_set_cpo_27node_100.npz 
     ```
 
-   (1) George: 
+   (1) Metis: 
     ```
     $ cd testbed
-    $ ./RunGeorge.sh 0
+    $ ./RunMetis.sh 0
     ```
     Output: the training log files including the RPS, constraint violations, time duration .etc will be store in the folder:
     ```
@@ -125,7 +126,7 @@ is stored in the folder:
     Output: the training log files including the RPS, constraint violations, time duration .etc will be store in the folder:
 
     
-## George: RL model training for the simulated container environment
+## Metis: RL model training for the simulated container environment
 
 1. Change the folder to `simulated_env`.
 
