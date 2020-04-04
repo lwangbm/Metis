@@ -19,19 +19,18 @@ This repository contains the tensorflow implementation for reinforcement learnin
 ## Installation
 ### Install Requirements
 ```
-git clone https://github.com/George-RL-based-container-sche/George.git
+git clone https://github.com/Metis-RL-based-container-sche/Metis.git
 ```
 ### Clone from Github source:
 ```
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 ## Content
 
 Our project includes three parts: 
 1. [Real-World LRA cluster](https://github.com/George-RL-based-container-sche/George/tree/master/testbed): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
-2. [Testbed](https://github.com/George-RL-based-container-sche/George/tree/master/testbed): George scheduling workflow based on our real-wrold LRA setting.
-3. [simulated_env](https://github.com/George-RL-based-container-sche/George/tree/master/simulated_env): George scheduling workflow based on our manually created LRA environment with 20 LRAs.
+2. [Experiments](https://github.com/George-RL-based-container-sche/George/tree/master/testbed): George scheduling workflow based on our real-wrold LRA setting.
 
 # Experiment workflow
 
