@@ -44,98 +44,132 @@ Our project includes three parts:
 is stored in the folder:
 
     ```
-    $ ls testbed/simulator/datasets/
+    $ cd Experiments/
+    $ ls ./simulator/datasets/
     ```
     ```
     ***_sample_collected.npz 
     ```
-
-2. Run motivating examples in a 27-node cluster:
-
-   (0) Check the container batches data is stored in the folder or create your own batches:
+    
+2. Train sub-schedulers in a 27-node sub-cluster: 
     ```
-    $ ls testbed/data
+    $ cd Experiments/
+    $ ./shell/TrainSubScheduler.sh
     ```
-    ```
-    batch_set_cpo_27node_100.csv batch_set_cpo_27node_100.npz 
-    ```
-
-   (1) Metis: 
-    ```
-    $ cd testbed
-    $ ./RunMetis.sh 0
-    ```
-    Output: the training log files including the RPS, constraint violations, time duration .etc will be store in the folder:
+    Output: the well-trained sub-scheduler models, as well as corresponding log files will be store in the folder:
     ```
     $ ls ./checkpoint/
     ```
-    
-    (2) Baseline algorithms: FPO and Subset Search can be executed similarly:
     ```
-    $ cd testbed
-    $ ./RunFPO.sh 0
-    $ ./RunSearchFeasible.sh 0
+    subScheduler_*/  
+
+    ```
+   
+
+3. High-level model training based on previously well-trained sub-schedulers.
+
+    (0) Check the sub-scheduler models are stored in the folder:
+    ```
+    $ cd Experiments/
+    $ ls ./checkpoint/
+    ```
+    ```
+    subScheduler_*/   
+    ```
+    Check the container batches data is stored in the folder or create your own batches:
+    ```
+    $ ls ./data
+    ```
+    ```
+    batch_set_200.npz batch_set_300.npz batch_set_400.npz
+    batch_set_1000.npz batch_set_2000.npz batch_set_3000.npz
     ```
     
-    (3) Baseline algorithms: Medea is implemented using Matlab, due to its outstanding performance in solving the Integer Linear Programming (ILP) Problem.
-        
-      Generate the performance-constraints used in Medea:
-      
+    (1) High-level training in a medium-sized cluster of 81 nodes:
+    ```
+    $ ./shell/RunHighLevelTrainingMedium.sh 200
+    $ ./shell/RunHighLevelTrainingMedium.sh 300
+    $ ./shell/RunHighLevelTrainingMedium.sh 400
+    ```
+    Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
+    ```
+    $ ls ./checkpoint/
+    ```
+    ```
+    81nodes_*_*/
+    ```
+    
+    (2) High-level training in a large cluster of 729 nodes:
+    ```
+    $ ./RunHighLevelTrainingLarge.sh 1000
+    $ ./RunHighLevelTrainingLarge.sh 2000
+    $ ./RunHighLevelTrainingLarge.sh 3000
+    ```
+    Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
+    ```
+    $ ls ./checkpoint/
+    ```
+     ```
+    729nodes_*_*/
+    ```
+
+## Baseline Method: Vanilla RL
+
+Vanilla RL is built directly upon Policy Gradient without our Hierarchical designs. 
+
+1. High-level training in a medium-sized cluster of 81 nodes:
+
+    ```
+    $ ./shell/RunVanillaRLMedium.sh 200
+    ```
+    Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
+    ```
+    $ ls ./checkpoint/
+    ```
+    ```
+    Vanilla_81_*_*/
+    ```
+
+
+## Baseline Method: Divide-Conquer (DC)
+
+DC Method does not use sub-schedulers. Our code below shows its behaviors in a medium-sized cluster of 81 nodes. Each cluster is hierarchically divided into three subsets.
+
+1. High-level training in a medium-sized cluster of 81 nodes:
+
+    ```
+    $ ./shell/RunDCMedium.sh 200
+    ```
+    Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
+    ```
+    $ ls ./checkpoint/
+    ```
+    ```
+    DC_81_*_*/
+    ```
+
+    
+## Baseline Method: Medea
+
+Medea is implemented using Matlab, due to its outstanding performance in solving the Integer Linear Programming (ILP) Problem.
+
+1. Generate the performance-constraints used in Medea:
+
     ```
     $ cd testbed
     $ ./GenerateInterference.sh
     $ ls
     ```
+    
     ```
     interference_applist.csv interference_rpslist.csv
     ```
-    Run Medea in the folder:
+2. Run Medea in the folder:
     ```
     $ cd testbed/Medea
     $ Matlab Medea.m
     ```
     Output: the scheduling decision log files including the allocation matrix, constraint violations, time duration .etc will be store in the folder.
 
-3. Train sub-schedulers in a 27-node cluster: 
-    ```
-    $ ./TrainSubScheduler.sh
-    ```
-    Output: the well-trained sub-scheduler models, as well as corresponding log files including the allocation matrix, constraint violations, time duration .etc will be store in the folder:
-    ```
-    $ ls ./checkpoint/
-    ```
-
-4. High-level model training based on previously well-trained sub-schedulers.
-
-    (0) Check the sub-scheduler models are stored in the folder:
-    ```
-    $ cd testbed/checkpoint
-    $ ls 
-    ```
-    ```
-    cpo_separate_level_0 cpo_separate_level_1 cpo_separate_level_2 ```  
-    ```
-    Check the container batches data is stored in the `./data/` folder or create your own batches.
-    
-    (1) High-level training using Transfer Learning, Fine-tune or from scratch:
-    ```
-    $ ./RunHighLevelTraining.sh 2000
-    $ ./RunHighLevelTrainingFineTune.sh 2000
-    $ ./RunHighLevelTrainingTS.sh 2000
-    ```
-    Output: the training log files including the RPS, constraint violations, time duration .etc will be store in the folder:
-
-    
-## Metis: RL model training for the simulated container environment
-
-1. Change the folder to `simulated_env`.
-
-2. Check the datasets stored in `./data/` folder.
-
-3. The 27-node experiments, sub-scheduler training, high-level model training based on sub-schedulers should follow the similar processes above.
-
-Output: the training log files including the RPS, constraint violations, time duration .etc will be store in the folder: `simulated_env/checkpoint/`.
-
 
 # References
-The core of our reinforcement learning algorithm is Constrained Policy Optimization: \[[Paper](https://arxiv.org/abs/1705.10528)\] \[[Code](https://github.com/jachiam/cpo)\]
