@@ -31,7 +31,7 @@ params = {
         'nodes per group': 3,
         'number of nodes in the cluster': 3,  # 81
         'replay size': 10,
-        'container_limitation per node': 8   # 81
+        'container_limitation per node': 27*8   # 81
     }
 
 
@@ -163,8 +163,7 @@ def train(params):
         """
         After an entire allocation, calculate total throughput, reward
         """
-        tput_state = env.get_tput_total_env()
-        tput = (sim.predict(tput_state.reshape(-1, env.NUM_APPS)) * tput_state).sum() / NUM_CONTAINERS
+        tput = env.get_tput_total_env() / NUM_CONTAINERS
         # print(tput)
         # external, record the tput values under use_external_knowledge, used to terminate use_external_knowledge
         RL_1.store_tput_per_episode(tput, epoch_i, time.time() - global_start_time)
@@ -211,7 +210,7 @@ def train(params):
             RL_1.save_session(ckpt_path)
             np.savez(np_path, tputs=np.array(RL_1.tput_persisit), candidate=np.array(RL_1.episode), time=np.array(RL_1.time_persisit),
                      highest_value_time=highest_value_time, highest_tput=highest_tput,
-                     allocation_optimal=allocation_optimal)
+                     allocation_optimal=allocation_optimal, entropy=np.array(RL_1.entropy_persist))
 
         epoch_i += 1
 

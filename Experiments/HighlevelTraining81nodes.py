@@ -22,7 +22,7 @@ hyper_parameter = {
 }
 params = {
         'batch_size': 10,
-        'epochs': 1000,
+        'epochs': 20000,
         'path': "81nodes_" + str(hyper_parameter['batch_set_choice']) + "_" + str(hyper_parameter['batch_C_numbers']) + "_" + "dataset_5percent",
         'recover': False,
         'number of containers': -1,
@@ -258,7 +258,7 @@ def train(params):
             RL_1.save_session(ckpt_path)
             np.savez(np_path, tputs=np.array(RL_1.tput_persisit), candidate=np.array(RL_1.episode), time=np.array(RL_1.time_persisit),
                      highest_value_time=highest_value_time, highest_tput=highest_tput,
-                     allocation_optimal=allocation_optimal,allocation_demo=allocation_demo)
+                     allocation_optimal=allocation_optimal,allocation_demo=allocation_demo, entropy=np.array(RL_1.entropy_persist))
 
             """
             optimal range adaptively change

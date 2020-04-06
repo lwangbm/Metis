@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#./RunVanillaRLMedium.sh 200
+#./RunDCMedium.sh 200
 cd ..
 pathname="./DC81nodes.py"
 

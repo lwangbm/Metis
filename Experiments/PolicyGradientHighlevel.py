@@ -34,6 +34,7 @@ class PolicyGradient:
         self.tput_batch = []
         self.tput_persisit = []
         self.time_persisit = []
+        self.entropy_persist = []
         self.episode = []
         # TODO self.vio = []: violation
 
@@ -75,7 +76,7 @@ class PolicyGradient:
 
             loss = tf.reduce_mean(neg_log_prob * self.tf_vt)
             loss += self.entropy_weight * tf.reduce_mean(tf.reduce_sum(tf.log(tf.clip_by_value(self.all_act_prob, 1e-30, 1.0)) * self.all_act_prob, axis=1))
-            self.entropy = self.entropy_weight * tf.reduce_mean(tf.reduce_sum(tf.log(tf.clip_by_value(self.all_act_prob, 1e-30, 1.0)) * self.all_act_prob, axis=1))
+            self.entropy = tf.reduce_mean(tf.reduce_sum(tf.log(tf.clip_by_value(self.all_act_prob, 1e-30, 1.0)) * self.all_act_prob, axis=1)) #self.entropy_weight
             self.loss = loss
 
         with tf.name_scope('train_clustering' + self.suffix):
@@ -120,6 +121,7 @@ class PolicyGradient:
 
         self.ep_obs, self.ep_as, self.ep_rs = [], [], []
         self.tput_batch = []
+        self.entropy_persist.append(entropy)
 
     def _discount_and_norm_rewards(self):
         """

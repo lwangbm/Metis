@@ -193,7 +193,7 @@ def train(params):
         """
         if (epoch_i % batch_size == 0) & (epoch_i > 1):
 
-            RL_1.learn(epoch_i, 0.01, True)
+            RL_1.learn(epoch_i, 0.0, True)
         """
         checkpoint, per 1000 episodes
         """
@@ -205,7 +205,7 @@ def train(params):
             RL_1.save_session(ckpt_path)
             np.savez(np_path, tputs=np.array(RL_1.tput_persisit), candidate=np.array(RL_1.episode), time=np.array(RL_1.time_persisit),
                      highest_value_time=highest_value_time, highest_tput=highest_tput,
-                     allocation_optimal=allocation_optimal)
+                     allocation_optimal=allocation_optimal, entropy=np.array(RL_1.entropy_persist))
 
         epoch_i += 1
 
