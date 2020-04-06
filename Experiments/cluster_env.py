@@ -12,7 +12,7 @@ Environment
 import numpy as np
 from Experiments.util.Util_Node_App import Application
 from Experiments.util.Util_Node_App import Node
-
+from Experiments.simulator.simulator import Simulator
 
 class LraClusterEnv():
 
@@ -50,7 +50,7 @@ class LraClusterEnv():
         # y_ori = np.nan_to_num(y_ori.astype(float))
         # self.regr_ori = MultiOutputRegressor(RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state))
         # self.regr_ori.fit(x_ori, y_ori)  #: rps
-        # self.sim = sim
+        self.sim = Simulator()
 
     def _state_reset(self):
         self.state = np.zeros([self.NUM_NODES, self.NUM_APPS])
@@ -126,7 +126,14 @@ class LraClusterEnv():
         #     node_tput_list.append(tput_this_node)
         # return sum(node_tput_list)
 
-
+    def get_all_node_throughput(self):
+        # testbed: using predictor
+        node_tput_list = []
+        for nid in range(self.NUM_NODES):
+            state_this_node = self.state[nid]
+            tput_this_node = (self.sim.predict(state_this_node.reshape(1, -1)) * state_this_node).sum()
+            node_tput_list.append(tput_this_node)
+        return sum(node_tput_list)
 
 
     def get_tput_total_env(self):

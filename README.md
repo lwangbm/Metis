@@ -30,8 +30,8 @@ pip install -r requirement.txt
 ## Content
 
 Our project includes three parts: 
-1. [Real-World LRA cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Real-World%20cluster): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
-2. [Experiments](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments): Metis scheduling workflow based on our real-wrold LRA setting.
+1. [Cluster](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Cluster): Implementation of our seven real-world LRAs that exhibit inter-container interferences.
+2. [Experiments](https://github.com/Metis-RL-based-container-sche/Metis/tree/master/Experiments): Metis scheduling workflow based on our real-world LRA setting.
 
 # Experiment workflow
 
@@ -50,7 +50,7 @@ is stored in the folder:
     ```
     ***_sample_collected.npz 
     ```
-    
+   
 2. Train sub-schedulers in a 27-node sub-cluster: 
     ```
     $ cd Experiments/
@@ -64,7 +64,7 @@ is stored in the folder:
     subScheduler_*/  
 
     ```
-   
+
 
 3. High-level model training based on previously well-trained sub-schedulers.
 
@@ -111,7 +111,7 @@ is stored in the folder:
     ```
      ```
     729nodes_*_*/
-    ```
+     ```
 
 ## Baseline Method: Vanilla RL
 
@@ -156,7 +156,7 @@ Medea is implemented using Matlab, due to its outstanding performance in solving
 1. Generate the performance-constraints used in Medea:
 
     ```
-    $ cd testbed
+    $ cd Experiments
     $ ./shell/GenerateInterference.sh
     $ ls
     ```
@@ -171,5 +171,43 @@ Medea is implemented using Matlab, due to its outstanding performance in solving
     ```
     Output: the scheduling decision log files including the allocation matrix, constraint violations, time duration .etc will be store in the folder.
 
+
+
+## Baseline Method: Paragon
+
+Paragon is re-implemented in Python. For the sake of fair comparison, we feed it with the full interference matrix information as Medea.
+
+1. Make sure `interference_applist.csv` has been generated in former Medea setup:
+
+    ```
+    $ ls interference_applist.csv
+    ```
+
+    Otherwise, generate the performance-constraints used in Medea:
+
+    ```
+    $ cd Experiments
+    $ ./shell/GenerateInterference.sh
+    $ ls interference_applist.csv
+    ```
+
+2. Run Paragon of Medium size or Large size:
+    ```
+    $ cd Experiments/shell
+    $ # Medium size
+    $ ./RunParagonMedium.sh 200
+    $
+    $ # Large size
+    $ ./RunParagonLarge.sh 2000
+    ```
+
+    Output: the default output shows the average throughput for each testing group as well as the scheduling latency.
+
+    For detailed output including container placement and per-container throughput breakdown for each node, please add `-v` after each python script:
+    
+    ```
+    $ cd Experiments
+    $ python3 ParagonExp.py --batch_set_size 200 --batch_choice 0 --size medium --verbose
+    ```
 
 # References
