@@ -115,7 +115,7 @@ def train(params):
     output_alloc_array_flag=0
     output_alloc_array=[]
     output_perf_list=[]
-    sensitivity = 1
+    sensitivity = 3
     nct_out_array = []
     perf_list = []
     start_time = time.time()
