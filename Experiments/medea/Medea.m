@@ -14,8 +14,8 @@ for choice = 1:30
     rat = [];
     abs_v = [];
     tic();
-    Num_C_per_app_1 = floor(preference(choice,:));
-    [allocation,ratio,abs_vio] = medea_core(Num_C_per_app_1, 81);
+    Num_C_per_app_1 = [200,200,200,200,200,200,200]%floor(preference(choice,:));
+    [allocation,ratio,abs_vio] = medea_core(Num_C_per_app_1, 729);
     alloc = [alloc; allocation];
     rat = [rat; ratio];
     abs_v = [abs_v;abs_vio];

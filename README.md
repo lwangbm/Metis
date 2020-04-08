@@ -1,6 +1,5 @@
-Metis
-====================
 Metis: Learning to Schedule Long-Running Applications in Shared Container Clusters with at Scale
+====================
 
 
 This repository contains the tensorflow implementation for reinforcement learning based Long Running Application scheduling with Hierarchical Reinforcement Learning (HRL). 
@@ -18,11 +17,11 @@ This repository contains the tensorflow implementation for reinforcement learnin
 8. Matlab 2019b or above
 
 ## Installation
-### Install Requirements
+### Clone from Github source:
 ```
 git clone https://github.com/Metis-RL-based-container-sche/Metis.git
 ```
-### Clone from Github source:
+### Install Requirements
 ```
 pip install -r requirement.txt
 ```
