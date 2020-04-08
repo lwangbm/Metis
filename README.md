@@ -64,7 +64,6 @@ is stored in the folder:
 
     ```
 
-
 3. High-level model training based on previously well-trained sub-schedulers.
 
     (0) Check the sub-scheduler models are stored in the folder:
