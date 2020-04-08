@@ -304,8 +304,6 @@ class ParagonScheduler():
         ref. 2.3 Classification for Interference
         "To derive sensitivity scores we develop several microbenchmarks, each stressing a specific shared resource with tunable intensity. We run an application concurrently with a microbenchmark and progressively tune up its intensity until the application violates its QoS, which is set at 95% of the performance achieved in isolation. Applications with high tolerance to interference (e.g., sensitivity score over 60% are easier to co-schedule than applications with low tolerance (low sensitivity score). Similarly, we detect the sensitivity of a microbenchmark to the interference the application causes by tuning up its intensity and recording when the performance of the microbenchmark degrades by 5% compared to its performance in isolation. In this case, high sensitivity scores, e.g., over 60% correspond to applications that cause a lot of interference in the specific shared resource."
 
-        My question is, what does it means, when sensitivity == 100%? Does that means the microbenchmark's workload should not increase a bit? If so, what is the baseline workload of microbenchmark?
-        Also, the relationship between tolerate and cause are not clearly stated. Does they added up to 100%?
         """
         # init as -1, means unprofiled.
         tolerate=-np.ones([self.num_apps, self.num_apps])
@@ -408,22 +406,6 @@ class ParagonScheduler():
         for node_id in range(self.num_nodes):
             all_node_soi_cause.append(self.get_node_cause(node_id, state))
         return np.array(all_node_soi_cause)  # shape: (num_nodes, num_sois)
-
-    def schedule(self):
-        """ ref. 3.2 Greedy Server Selection, paragraph 2 & 3
-        "Specifically it evaluates two metrics, D1 = t_server − c_newapp and D2 = t_newapp − c_server , where t is the sensitivity score for tolerated and c for caused interference for a specific SoI. The cumulative sensitivity of a server to caused interference is the sum of sensitivities of individual applications running on it, while the sensitivity to tolerated interference is the minimum of these values."
-        ......
-        "We examine candidate servers for an application in the following way. The process is explained for interference tolerated by the server and caused by the new workload (D1) and is exactly the same for D2. Given the classification of an application, we start from the resource that is most difficult to satisfy (highest sensitivity score to caused interference). We query the server state and select the server set for which D1 is non-negative for this SoI. Next, we examine the second SoI in order of decreasing sensitivity scores, filtering out any servers for which D1 is negative. The process continues until all SoIs have been examined. Then, we take the intersection of candidate server sets for D1 and D2. We now consider heterogeneity. From the set of candidates we select servers that correspond to the best SC for the new workload and from their subset we select the server with min(||D1 + D2||L1)."
-
-        ## About SoI: num_SoIs == num_apps
-        Here we regard different co-located applications (e.g., Redis, MXNet-Model-Server, CPU, ...) as different Source of Interference (e.g., CPU, Memory bandwidth, Cache, Network, Disk, ...), which is less scalable than the original design (because num of app is not fixed), but probably more accurate.
-
-        "we start from the resource that is most difficult to satisfy (highest sensitivity score to caused interference)"
-        "we examine the second SoI in order of decreasing sensitivity scores, filtering out any servers for which D1 is negative. The process continues until all SoIs have been examined."
-        ==> If so, why does the order matters?
-
-        """
-        pass
 
     def _reconstruct_interference_scores(self):
         raise NotImplementedError("Not fully profiled is not considered for now")
