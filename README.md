@@ -9,12 +9,11 @@ This repository contains the tensorflow implementation for reinforcement learnin
 ## Dependencies
 1. Python 3.5 or above
 2. Tensorflow 1.12.0
-3. scipy
-4. numpy
-5. pandas
-6. matplotlib
-7. sklearn
-8. Matlab 2019b or above
+3. scipy v1.1.0
+4. numpy v1.17.1
+5. pandas v0.20.3
+6. sklearn
+7. Matlab 2019b or above
 
 ## Installation
 ### Clone from Github source:
