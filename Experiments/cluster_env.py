@@ -8,45 +8,22 @@ Environment
     2. step: allocate one container to a node, return new state
     3. get_tput_total_env: get the throughput of the entire cluster (after each episode)
 """
-
 import numpy as np
-from util.Util_Node_App import Application
-from util.Util_Node_App import Node
 from simulator.simulator import Simulator
 
 class LraClusterEnv():
 
     def __init__(self, num_nodes, ifSimulator=True):
         #: Cluster configuration
-        self.NUM_NODES = num_nodes # node_id: 0,1,2,...
-
-        #: homogeneous cluster
+        self.NUM_NODES = num_nodes
         # TODO: heterogeneous cluster
-        #: fixed 7 apps
         self.NUM_APPS = 7
-        self.BasicThroughput = [100] * self.NUM_APPS  # normalized basic throughput
-        #: initialized state to zero matrix
         self._state_reset()
-
-        # testbed : initialize the predictor
-        # Hyper-parameters
-        # n_estimators = 20
-        # max_depth = 10
-        # random_state = 0
-        # np_path = "./predictor/" + predictor_path + ".npz"
-        # npzfile = np.load(np_path)
-        # x_ori= npzfile['alloc']
-        # y_ori = npzfile[predicted_metric]  # alternatively, we have npzfile['rt_50'], npzfile['rt_99']
-        # y_ori = np.nan_to_num(y_ori.astype(float))
-        # self.regr_ori = MultiOutputRegressor(RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state))
-        # self.regr_ori.fit(x_ori, y_ori)  #: rps
         if ifSimulator:
             self.sim = Simulator()
 
     def _state_reset(self):
         self.state = np.zeros([self.NUM_NODES, self.NUM_APPS])
-        # testbed : we initialize the cluster state with each node having an app_1
-        # self.state[:, 1] += 1
 
     def reset(self):
         self._state_reset()
@@ -72,7 +49,6 @@ class LraClusterEnv():
         return self.state
 
     def get_all_node_throughput(self):
-        # testbed: using predictor
         node_tput_list = []
         for nid in range(self.NUM_NODES):
             state_this_node = self.state[nid]
@@ -80,9 +56,7 @@ class LraClusterEnv():
             node_tput_list.append(tput_this_node)
         return sum(node_tput_list)
 
-
     def get_tput_total_env(self):
-        # testbed: we replace env.get_tput_total_env() with the predictor
         return self._get_throughput_predictor
 
     def _create_preference(self):
@@ -149,37 +123,7 @@ class LraClusterEnv():
         """
         return preference
 
-
-    def get_min_throughput(self):
-        # TODO: minimum throughput, not used yet, for fairness
-        node_list = []
-        for nid in range(self.NUM_NODES):
-            node = Node(nid,
-                        self.NODE_CAPACITY_NETWORK[nid],
-                        self.NODE_CAPACITY_MEMBW[nid],
-                        self.NODE_CAPACITY_CACHE[nid],
-                        self)
-            for aid in range(self.NUM_APPS):
-                container = self.state[nid][aid]
-                if container > 0:
-                    app =  Application(aid,
-                                      100,
-                                      self.NETWORK_BW_PER_QUERY[aid],
-                                      self.MEM_BW_PER_QUERY[aid],
-                                      self.CACHE_PER_QUERY[aid],
-                                      container)
-                    node.add_application(app)
-            node.calculate_new_tput()
-            node_list.append(node)
-
-        minimum_tput = 100
-        for node in node_list:
-            if node.minimum() < minimum_tput:
-                minimum_tput = node.minimum()
-        return minimum_tput
-
     def get_throughput_single_node(self, nid):
-        # testbed: we replace env.get_tput_total_env() with the predictor
 
         state_this_node = self.state[nid]
         # TODO: we could change sum() to mean(), if using latency
@@ -191,15 +135,3 @@ class LraClusterEnv():
         state_this_node = np.array(container_list)
         tput_this_node = (self.sim.predict(state_this_node.reshape(1, -1)) * state_this_node).sum()
         return tput_this_node, self.sim.predict(state_this_node.reshape(1, -1))
-
-    def get_SLA_violation(self, sla):
-        violation = 0
-        for nid in range(self.NUM_NODES):
-            state_this_node = self.state[nid]
-            # TODO: we could change sum() to mean(), if using latency
-            tput_this_node = (self.sim.predict(state_this_node.reshape(1, -1)))
-            for app_index in range(self.NUM_APPS):
-                if tput_this_node[0][app_index] >0:
-                    if tput_this_node[0][app_index] < sla:
-                        violation += state_this_node[app_index]
-        return violation
