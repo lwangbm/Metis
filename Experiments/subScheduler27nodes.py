@@ -60,7 +60,7 @@ class subScheduler():
         Build Network
         """
         self.n_actions = self.nodes_per_group  #: 3 nodes per group
-        self.n_features = int(self.n_actions * self.NUM_APPS + 1 + self.env.NUM_APPS)  #: 29
+        self.n_features = int(self.n_actions * self.NUM_APPS + 1 + self.NUM_APPS)  #: 29
 
         self.RL_1 = PolicyGradient(n_actions=self.n_actions, n_features=self.n_features, learning_rate=params['learning rate'], suffix=surffix + '1')
 
@@ -82,7 +82,7 @@ class subScheduler():
 
         # assert sum(rnd_array) == 81
         source_batch, index_data = self.batch_data(rnd_array.astype(int))  # index_data = [0,1,2,0,1,2]
-        env = LraClusterEnv(num_nodes=self.NUM_NODES)
+        env = LraClusterEnv(num_nodes=self.NUM_NODES, ifSimulator=False)
         observation = env.reset().copy()  # (9,9)
 
 

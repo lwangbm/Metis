@@ -16,25 +16,15 @@ from simulator.simulator import Simulator
 
 class LraClusterEnv():
 
-    def __init__(self, num_nodes):
+    def __init__(self, num_nodes, ifSimulator=True):
         #: Cluster configuration
         self.NUM_NODES = num_nodes # node_id: 0,1,2,...
 
         #: homogeneous cluster
         # TODO: heterogeneous cluster
-        self.NODE_CAPACITY_NETWORK = [1200] * self.NUM_NODES
-        self.NODE_CAPACITY_MEMBW = [700] * self.NUM_NODES
-        self.NODE_CAPACITY_CACHE = [900] * self.NUM_NODES
-
-        #: fixed 9 apps
+        #: fixed 7 apps
         self.NUM_APPS = 7
         self.BasicThroughput = [100] * self.NUM_APPS  # normalized basic throughput
-
-        #: Application Resource Usage Per Query
-        self.NETWORK_BW_PER_QUERY = [1, 2, 3, 1, 2, 3, 1, 2, 3]  # network bandwidth
-        self.MEM_BW_PER_QUERY = [1, 2, 3, 1, 2, 3, 1, 2, 3]  # memory bandwidth
-        self.CACHE_PER_QUERY = [1, 2, 3, 1, 2, 3, 1, 2, 3]  # cache footprint
-
         #: initialized state to zero matrix
         self._state_reset()
 
@@ -50,7 +40,8 @@ class LraClusterEnv():
         # y_ori = np.nan_to_num(y_ori.astype(float))
         # self.regr_ori = MultiOutputRegressor(RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state))
         # self.regr_ori.fit(x_ori, y_ori)  #: rps
-        self.sim = Simulator()
+        if ifSimulator:
+            self.sim = Simulator()
 
     def _state_reset(self):
         self.state = np.zeros([self.NUM_NODES, self.NUM_APPS])
@@ -75,56 +66,10 @@ class LraClusterEnv():
     def _get_state(self):
         return self.state
 
-
-    @property
-    def _get_throughput(self):
-        """
-       First create the node instance for each node, along with the application instances residing in it
-           For each node, maintain the app list, node capacity of network bw, mem bw and so on
-           For each app, maintain the container number, nw/mem bw consumption for each query
-       Second calculate the throughput for each app and each node, based on interference analysis
-       :return: total throughput for all the nodes and all the containers residing in them
-        """
-        node_list = []
-        for nid in range(self.NUM_NODES):
-            node = Node(nid,
-                        self.NODE_CAPACITY_NETWORK[nid],
-                        self.NODE_CAPACITY_MEMBW[nid],
-                        self.NODE_CAPACITY_CACHE[nid],
-                        self)
-            for aid in range(self.NUM_APPS):
-                num_container = self.state[nid][aid]
-                if num_container > 0:
-                    app = Application(aid,
-                                      self.BasicThroughput[aid],
-                                      self.NETWORK_BW_PER_QUERY[aid],
-                                      self.MEM_BW_PER_QUERY[aid],
-                                      self.CACHE_PER_QUERY[aid],
-                                      num_container)
-                    node.add_application(app)
-            node.calculate_new_tput()
-            node_list.append(node)
-
-        total_tput = 0
-        for node in node_list:
-            total_tput += node.total_tput()
-        return total_tput
-
     @property
     def _get_throughput_predictor(self):
         # testbed: using predictor
-
         return self.state
-
-        # return (self.sim.predict(self.state.reshape(self.NUM_NODES, -1)) * self.state).sum()
-        # node_tput_list = []
-        #
-        # for nid in range(self.NUM_NODES):
-        #     state_this_node = self.state[nid]
-        #     # TODO: we could change sum() to mean(), if using latency
-        #     tput_this_node = (self.sim.predict(state_this_node.reshape(1, -1)) * state_this_node).sum()
-        #     node_tput_list.append(tput_this_node)
-        # return sum(node_tput_list)
 
     def get_all_node_throughput(self):
         # testbed: using predictor
