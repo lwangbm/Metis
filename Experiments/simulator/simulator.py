@@ -5,8 +5,8 @@ import numpy as np
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.ensemble import RandomForestRegressor
 from pathlib import Path
-from Experiments.simulator.train_test import training_with_cross_validation
-from Experiments.simulator.utils import profile_series_to_profile_setting_list, profile_setting_list_to_reproduce_x
+from simulator.train_test import training_with_cross_validation
+from simulator.utils import profile_series_to_profile_setting_list, profile_setting_list_to_reproduce_x
 
 # # npzfile_path_list = ['datasets/0901-2046results-median-normed.npz'] # Latest dataset
 # npzfile_path_list = ['datasets/0905-6435results-normed.npz']
