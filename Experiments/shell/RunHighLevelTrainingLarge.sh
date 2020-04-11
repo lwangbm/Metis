@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #./RunHighLevelTrainingLarge.sh 1000
-cd ..
+#cd ..
 pathname="./HighlevelTraining729nodes.py"
 
 for VARIABLE in {0..29}

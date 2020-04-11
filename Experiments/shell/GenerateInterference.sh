@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #./GenerateInterference.sh
-cd ..
+#cd ..
 pathname="InterferenceGenerate.py"
 python3 $pathname
 

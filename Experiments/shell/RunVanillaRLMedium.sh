@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #./RunVanillaRLMedium.sh 200
-cd ..
+#cd ..
 pathname="./VanillaRL81nodes.py"
 
 for VARIABLE in {0..29}

@@ -22,7 +22,7 @@ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
 ```
 ### Install Requirements
 ```
-pip install -r requirement.txt
+pip3 install -r requirement.txt
 ```
 
 ## Content

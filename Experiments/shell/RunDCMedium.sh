@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #./RunDCMedium.sh 200
-cd ..
+#cd ..
 pathname="./DC81nodes.py"
 
 for VARIABLE in {0..29}

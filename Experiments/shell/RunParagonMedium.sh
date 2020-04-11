@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #./RunParagonMedium.sh 200
-cd ..
+#cd ..
 pathname="./ParagonExp.py"
 
 for VARIABLE in {0..29}
