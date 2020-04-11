@@ -84,9 +84,9 @@ is stored in the folder:
     
     (1) High-level training in a medium-sized cluster of 81 nodes:
     ```
-    $ ./shell/RunHighLevelTrainingMedium.sh 200
-    $ ./shell/RunHighLevelTrainingMedium.sh 300
-    $ ./shell/RunHighLevelTrainingMedium.sh 400
+    $ bash ./shell/RunHighLevelTrainingMedium.sh 200
+    $ bash ./shell/RunHighLevelTrainingMedium.sh 300
+    $ bash ./shell/RunHighLevelTrainingMedium.sh 400
     ```
     Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
     ```
@@ -98,9 +98,9 @@ is stored in the folder:
     
     (2) High-level training in a large cluster of 729 nodes:
     ```
-    $ ./shell/RunHighLevelTrainingLarge.sh 1000
-    $ ./shell/RunHighLevelTrainingLarge.sh 2000
-    $ ./shell/RunHighLevelTrainingLarge.sh 3000
+    $ bash ./shell/RunHighLevelTrainingLarge.sh 1000
+    $ bash ./shell/RunHighLevelTrainingLarge.sh 2000
+    $ bash ./shell/RunHighLevelTrainingLarge.sh 3000
     ```
     Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
     ```
@@ -117,7 +117,7 @@ Vanilla RL is built directly upon Policy Gradient without our Hierarchical desig
 1. High-level training in a medium-sized cluster of 81 nodes:
 
     ```
-    $ ./shell/RunVanillaRLMedium.sh 200
+    $ bash ./shell/RunVanillaRLMedium.sh 200
     ```
     Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
     ```
@@ -135,7 +135,7 @@ DC Method does not use sub-schedulers. Our code below shows its behaviors in a m
 1. High-level training in a medium-sized cluster of 81 nodes:
 
     ```
-    $ ./shell/RunDCMedium.sh 200
+    $ bash ./shell/RunDCMedium.sh 200
     ```
     Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
     ```

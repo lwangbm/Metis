@@ -45,10 +45,11 @@ class subScheduler():
         parameters set
         """
         self.NUM_NODES = params['number of nodes in the cluster']
+        self.NUM_APPS = 7
         # self.NUM_CONTAINERS = params['number of containers']
 
         # self.sim = Simulator()
-        self.env = LraClusterEnv(num_nodes=self.NUM_NODES)
+        # self.env = LraClusterEnv(num_nodes=self.NUM_NODES)
 
         ckpt_path_1 = path_surffix + path_name + "_1" + "/model.ckpt"
         ckpt_path_2 = path_surffix + path_name + "_2" + "/model.ckpt"
@@ -59,7 +60,7 @@ class subScheduler():
         Build Network
         """
         self.n_actions = self.nodes_per_group  #: 3 nodes per group
-        self.n_features = int(self.n_actions * self.env.NUM_APPS + 1 + self.env.NUM_APPS)  #: 29
+        self.n_features = int(self.n_actions * self.NUM_APPS + 1 + self.env.NUM_APPS)  #: 29
 
         self.RL_1 = PolicyGradient(n_actions=self.n_actions, n_features=self.n_features, learning_rate=params['learning rate'], suffix=surffix + '1')
 
