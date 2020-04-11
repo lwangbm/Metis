@@ -6,8 +6,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 import numpy as np
 import time
 import os
-from Experiments.highlevel_env import LraClusterEnv
-from Experiments.PolicyGradientHighlevel import PolicyGradient
+from highlevel_env import LraClusterEnv
+from PolicyGradientHighlevel import PolicyGradient
 import copy
 
 """

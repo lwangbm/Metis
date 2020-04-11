@@ -9,8 +9,8 @@ Environment
     3. get_tput_total_env: get the throughput of the entire cluster (after each episode)
 """
 import numpy as np
-from Experiments.subScheduler27nodes import subScheduler
-from Experiments.simulator.simulator import Simulator
+from subScheduler27nodes import subScheduler
+from simulator.simulator import Simulator
 
 class LraClusterEnv():
 

@@ -1,6 +1,6 @@
 import numpy as np
-from Experiments.cluster_env import LraClusterEnv
-from Experiments.PolicyGradient import PolicyGradient
+from cluster_env import LraClusterEnv
+from PolicyGradient import PolicyGradient
 
 
 params = {

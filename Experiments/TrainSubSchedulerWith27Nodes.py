@@ -5,10 +5,10 @@ import sys
 sys.path.append("/Users/ourokutaira/Desktop/Metis")
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
-from Experiments.cluster_env import LraClusterEnv
-from Experiments.PolicyGradient import PolicyGradient
+from cluster_env import LraClusterEnv
+from PolicyGradient import PolicyGradient
 import argparse
-from Experiments.simulator.simulator import Simulator
+from simulator.simulator import Simulator
 
 """
 '--start_sample: 0, 10, 20, ``` 210
@@ -18,7 +18,7 @@ python3 TrainSubSchedulerWith27Nodes.py --start_sample 0
 params = {
         'batch_size': 200,
         'epochs': 8000000,
-        'path': "subScheduler_",
+        'path': "",
         'recover': False,
         'learning rate': 0.01,
         'nodes per group': 3,

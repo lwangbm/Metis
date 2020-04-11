@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import pandas as pd
 sys.path.append("/Users/ourokutaira/Desktop/Metis")
-from Experiments.cluster_env import LraClusterEnv
+from cluster_env import LraClusterEnv
 
 
 params = {

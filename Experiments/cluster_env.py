@@ -10,9 +10,9 @@ Environment
 """
 
 import numpy as np
-from Experiments.util.Util_Node_App import Application
-from Experiments.util.Util_Node_App import Node
-from Experiments.simulator.simulator import Simulator
+from util.Util_Node_App import Application
+from util.Util_Node_App import Node
+from simulator.simulator import Simulator
 
 class LraClusterEnv():
 
