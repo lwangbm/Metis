@@ -1,4 +1,3 @@
-How to do virtual file processing
 # Python Scene Detection
 Description: it detects scene changes in videos (e.g., movies) and splits the video into temporal segments. A good detector not only cuts the files by comparing the intensity/brightness between each frame but also analyzes the contents.
 
