@@ -1,0 +1,12 @@
+https://s3.amazonaws.com/model-server/inputs/3dog.jpg
+https://s3.amazonaws.com/model-server/inputs/Pug-Cookie.jpg
+https://s3.amazonaws.com/model-server/inputs/arcface-input1.jpg
+https://s3.amazonaws.com/model-server/inputs/arcface-input2.jpg
+https://s3.amazonaws.com/model-server/inputs/dog-ssd.jpg
+https://s3.amazonaws.com/model-server/inputs/dogbeach.jpg
+https://s3.amazonaws.com/model-server/inputs/duc-city.jpg
+https://s3.amazonaws.com/model-server/inputs/ferplus-input.jpg
+https://s3.amazonaws.com/model-server/inputs/flower.jpg
+https://s3.amazonaws.com/model-server/inputs/kitten.jpg
+https://s3.amazonaws.com/model-server/inputs/sailboat.jpg
+https://s3.amazonaws.com/model-server/inputs/tabby.jpg
