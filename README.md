@@ -88,9 +88,12 @@ Our project includes three parts:
 
     ```bash
     (manager)$ cd Cluster/scripts
+    
     # Launching 1 container for each workload on WORKER1:
     # '0' indicates idle; '1' ~ '7' indicate different workloads.
+    
     (manager)$ ./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7
+    
     # e.g., launch 3 workload-1, 2 workload-2, and 1 workload-3 container:
     # ./service-launching.sh $WORKER2 0 0 1 1 1 2 2 3
     ```
@@ -100,10 +103,12 @@ Our project includes three parts:
     ```bash
     $ ssh ubuntu@$CLIENT1
     (client1)$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
-    (client1)$ cd Cluster/scripts
-    # export WORKER1=ec2-xxx-xxx-xxx-101.us-west-2.compute.amazonaws.com
+
+    # export WORKER1=ec2-xxx-xxx-xxx-101.us-west-2.compute.amazonaws.com    
     # Send single request for testing
+    (client1)$ cd Cluster/scripts
     (client1)$ curl $WORKER1:8081
+    
     # Or pressure the application with locust or other tools, e.g.,
     (client1)$ cd Cluster/scripts
     (client1)$ python3 parallel_locust.py $WORKER1
