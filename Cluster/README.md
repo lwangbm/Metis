@@ -17,9 +17,24 @@ The scripts locate in folder `scripts` while the workloads (i.e., Real-world app
 ## Scripts
 
 - `install_docker.sh`: install docker on each node (Ubuntu).
+
 - `parallel_locust.py`: generate requests for load testing towards applications, using [Python Locust](https://locust.io). Requires `locustfile.py` in the same folder.
-- `profiling-go.sh`: collect performance benchmark datasets through automatically deploying, profiling, terminating, and re-deploying. Requires `script-launching-8-slot.sh` in the same folder. Usage: `./profiling-go.sh $WORKER1 '6-6-6-6-7-7-7-7 0-0-0-1-6-6-6-8' $WORKER1_INSTANCE_ID`
-- `service-launching.sh`: (on Docker Swarm manager) launch certain workloads on certain worker node from the manager node. Usage: `./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7`
+
+   ```bash
+   python3 parallel_locust.py $WORKER1
+   ```
+
+- `profiling-go.sh`: collect performance benchmark datasets through automatically deploying, profiling, terminating, and re-deploying. Requires `script-launching-8-slot.sh` in the same folder.
+
+   ```bash
+   ./profiling-go.sh $WORKER1 '6-6-6-6-7-7-7-7 0-0-0-1-6-6-6-8' $WORKER1_INSTANCE_ID
+   ```
+
+- `service-launching.sh`: (on Docker Swarm manager) launch certain workloads on certain worker node from the manager node.
+
+    ```bash
+    ./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7
+    ```
 
 
 ## Real-world Applications
