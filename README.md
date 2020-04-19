@@ -1,5 +1,6 @@
-Metis: Learning to Schedule Long-Running Applications in Shared Container Clusters with at Scale
+Metis
 ====================
+Metis: Learning to Schedule Long-Running Applications in Shared Container Clusters with at Scale
 
 
 This repository contains the tensorflow implementation for reinforcement learning based Long Running Application scheduling with Hierarchical Reinforcement Learning (HRL). 
@@ -9,20 +10,21 @@ This repository contains the tensorflow implementation for reinforcement learnin
 ## Dependencies
 1. Python 3.5 or above
 2. Tensorflow 1.12.0
-3. scipy v1.1.0
-4. numpy v1.17.1
-5. pandas v0.20.3
-6. sklearn
-7. Matlab 2019b or above
+3. scipy
+4. numpy
+5. pandas
+6. matplotlib
+7. sklearn
+8. Matlab 2019b or above
 
 ## Installation
-### Clone from Github source:
+### Install Requirements
 ```
 git clone https://github.com/Metis-RL-based-container-sche/Metis.git
 ```
-### Install Requirements
+### Clone from Github source:
 ```
-pip3 install -r requirement.txt
+pip install -r requirement.txt
 ```
 
 ## Content
@@ -35,6 +37,92 @@ Our project includes three parts:
 
 ## Real-World LRA cluster setup and profiler establishment
 
+1. Launch a cluster of tens of nodes on [Amazon EC2](https://aws.amazon.com/ec2) consisting of at least 1 manager node, several worker nodes, and some client nodes. Record the public DNS address or ip address of each node and make sure the manager and client nodes are accessible through the SSH key `~/.ssh/id_rsa`.
+    ```bash
+    export MANAGER=ec2-xxx-xxx-xxx-100.us-west-2.compute.amazonaws.com
+    export WORKER1=ec2-xxx-xxx-xxx-101.us-west-2.compute.amazonaws.com
+    # ......
+    export CLIENT1=ec2-xxx-xxx-xxx-201.us-west-2.compute.amazonaws.com
+    # ......
+
+    $ ssh ubuntu@$MANAGER
+    ubuntu@manager:~$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
+    ```
+
+2. If Docker has not been installed, install Docker on each manager, worker, and client node:
+
+    ```bash
+    ubuntu@manager:~$ sudo Cluster/scripts/install_docker.sh
+    ubuntu@worker1:~$ sudo Cluster/scripts/install_docker.sh
+    # ......
+    ```
+
+3. Coordinating manager and worker nodes through Docker Swarm to form a Swarm cluster.
+
+    ```bash
+    $ ssh $MANAGER docker swarm init
+
+    # Output
+    To add a worker to this swarm, run the following command:
+
+        docker swarm join --token SWMTKN-1-1bu27zw7lzh6pnu1l0981bu1m6nqq2pcgk25kovuh565319cah-8480smxu3kp7cj5nfkck2itax 192.168.99.100:2377
+    ```
+
+    Then execute the aforementioned command on each worker. 
+
+    ```bash
+    $ ssh $WORKER1 docker swarm join --token SWMTKN-1-1bu27zw7lzh6pnu1l0981bu1m6nqq2pcgk25kovuh565319cah-8480smxu3kp7cj5nfkck2itax 192.168.99.100:2377
+
+    # Output
+    This node joined a swarm as a worker.
+    ```
+
+4. Build docker images of different workloads on the manager node.
+
+    ```bash
+    ubuntu@manager:~$ cd Cluster/workloads
+    ubuntu@manager:~$ ./build-all.sh
+    ```
+
+5. Launch certain workloads on certain worker node from the manager node.
+
+    ```bash
+    ubuntu@manager:~$ cd Cluster/scripts
+    # Launching 1 container for each workload on WORKER1:
+    # '0' indicates idle; '1' ~ '7' indicate different workloads.
+    ubuntu@manager:~$ ./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7
+    # e.g., launch 3 workload-1, 2 workload-2, and 1 workload-3 container:
+    # ./service-launching.sh $WORKER2 0 0 1 1 1 2 2 3
+    ```
+
+6. Sending requests from client node to the worker node
+
+    ```bash
+    $ ssh ubuntu@$CLIENT1
+    ubuntu@client1:~$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
+    ubuntu@client1:~$ cd Cluster/scripts
+    # export WORKER1=ec2-xxx-xxx-xxx-101.us-west-2.compute.amazonaws.com
+    # Send single request for testing
+    ubuntu@client1:~$ curl $WORKER1:8081
+    # Or pressure the application with locust or other tools, e.g.,
+    ubuntu@client1:~$ cd Cluster/scripts
+    ubuntu@client1:~$ python3 parallel_locust.py $WORKER1
+    # Default log path lies in Cluster/scripts/log
+    ```
+
+7. (Optional) Collecting performance benchmark datasets through automatically deploying, profiling, terminating, and re-deploying.
+
+    ```bash
+    # Here the "0-1-2-3-4-5-6-7" or "0-0-1-1-1-2-2-3" means combination
+    # of different workloads (as described step 5).
+    ubuntu@manager:~$ ./profiling-go.sh $WORKER1 "0-1-2-3-4-5-6-7 0-0-1-1-1-2-2-3 0-0-0-0-0-0-0-7 0-0-0-0-1-1-1-7 2-4-4-6-6-6-6-7"
+    ```
+
+8. Terminate the swarm cluster on the manager node.
+
+    ```bash
+    ubuntu@manager:~$ docker swarm leave --force
+    ```
 
 ## Metis: RL model training for the real-world LRA cluster
 
@@ -63,6 +151,7 @@ is stored in the folder:
 
     ```
 
+
 3. High-level model training based on previously well-trained sub-schedulers.
 
     (0) Check the sub-scheduler models are stored in the folder:
@@ -84,9 +173,9 @@ is stored in the folder:
     
     (1) High-level training in a medium-sized cluster of 81 nodes:
     ```
-    $ bash ./shell/RunHighLevelTrainingMedium.sh 200
-    $ bash ./shell/RunHighLevelTrainingMedium.sh 300
-    $ bash ./shell/RunHighLevelTrainingMedium.sh 400
+    $ ./shell/RunHighLevelTrainingMedium.sh 200
+    $ ./shell/RunHighLevelTrainingMedium.sh 300
+    $ ./shell/RunHighLevelTrainingMedium.sh 400
     ```
     Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
     ```
@@ -98,9 +187,9 @@ is stored in the folder:
     
     (2) High-level training in a large cluster of 729 nodes:
     ```
-    $ bash ./shell/RunHighLevelTrainingLarge.sh 1000
-    $ bash ./shell/RunHighLevelTrainingLarge.sh 2000
-    $ bash ./shell/RunHighLevelTrainingLarge.sh 3000
+    $ ./shell/RunHighLevelTrainingLarge.sh 1000
+    $ ./shell/RunHighLevelTrainingLarge.sh 2000
+    $ ./shell/RunHighLevelTrainingLarge.sh 3000
     ```
     Output: the training log files including the RPS, placement matrix, training time duration .etc will be store in the folder:
     ```
@@ -117,7 +206,7 @@ Vanilla RL is built directly upon Policy Gradient without our Hierarchical desig
 1. High-level training in a medium-sized cluster of 81 nodes:
 
     ```
-    $ bash ./shell/RunVanillaRLMedium.sh 200
+    $ ./shell/RunVanillaRLMedium.sh 200
     ```
     Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
     ```
@@ -135,7 +224,7 @@ DC Method does not use sub-schedulers. Our code below shows its behaviors in a m
 1. High-level training in a medium-sized cluster of 81 nodes:
 
     ```
-    $ bash ./shell/RunDCMedium.sh 200
+    $ ./shell/RunDCMedium.sh 200
     ```
     Output: the training log files including the RPS, placement matrix, training time duration, etc will be store in the folder:
     ```
