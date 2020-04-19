@@ -46,14 +46,14 @@ Our project includes three parts:
     # ......
 
     $ ssh ubuntu@$MANAGER
-    ubuntu@manager:~$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
+    (manager)$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
     ```
 
 2. If Docker has not been installed, install Docker on each manager, worker, and client node:
 
     ```bash
-    ubuntu@manager:~$ sudo Cluster/scripts/install_docker.sh
-    ubuntu@worker1:~$ sudo Cluster/scripts/install_docker.sh
+    (manager)$ sudo Cluster/scripts/install_docker.sh
+    (worker1)$ sudo Cluster/scripts/install_docker.sh
     # ......
     ```
 
@@ -80,17 +80,17 @@ Our project includes three parts:
 4. Build docker images of different workloads on the manager node.
 
     ```bash
-    ubuntu@manager:~$ cd Cluster/workloads
-    ubuntu@manager:~$ ./build-all.sh
+    (manager)$ cd Cluster/workloads
+    (manager)$ ./build-all.sh
     ```
 
 5. Launch certain workloads on certain worker node from the manager node.
 
     ```bash
-    ubuntu@manager:~$ cd Cluster/scripts
+    (manager)$ cd Cluster/scripts
     # Launching 1 container for each workload on WORKER1:
     # '0' indicates idle; '1' ~ '7' indicate different workloads.
-    ubuntu@manager:~$ ./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7
+    (manager)$ ./service-launching.sh $WORKER1 0 1 2 3 4 5 6 7
     # e.g., launch 3 workload-1, 2 workload-2, and 1 workload-3 container:
     # ./service-launching.sh $WORKER2 0 0 1 1 1 2 2 3
     ```
@@ -99,14 +99,14 @@ Our project includes three parts:
 
     ```bash
     $ ssh ubuntu@$CLIENT1
-    ubuntu@client1:~$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
-    ubuntu@client1:~$ cd Cluster/scripts
+    (client1)$ git clone https://github.com/Metis-RL-based-container-sche/Metis.git
+    (client1)$ cd Cluster/scripts
     # export WORKER1=ec2-xxx-xxx-xxx-101.us-west-2.compute.amazonaws.com
     # Send single request for testing
-    ubuntu@client1:~$ curl $WORKER1:8081
+    (client1)$ curl $WORKER1:8081
     # Or pressure the application with locust or other tools, e.g.,
-    ubuntu@client1:~$ cd Cluster/scripts
-    ubuntu@client1:~$ python3 parallel_locust.py $WORKER1
+    (client1)$ cd Cluster/scripts
+    (client1)$ python3 parallel_locust.py $WORKER1
     # Default log path lies in Cluster/scripts/log
     ```
 
@@ -115,13 +115,13 @@ Our project includes three parts:
     ```bash
     # Here the "0-1-2-3-4-5-6-7" or "0-0-1-1-1-2-2-3" means combination
     # of different workloads (as described step 5).
-    ubuntu@manager:~$ ./profiling-go.sh $WORKER1 "0-1-2-3-4-5-6-7 0-0-1-1-1-2-2-3 0-0-0-0-0-0-0-7 0-0-0-0-1-1-1-7 2-4-4-6-6-6-6-7"
+    (manager)$ ./profiling-go.sh $WORKER1 "0-1-2-3-4-5-6-7 0-0-1-1-1-2-2-3 0-0-0-0-0-0-0-7 0-0-0-0-1-1-1-7 2-4-4-6-6-6-6-7"
     ```
 
 8. Terminate the swarm cluster on the manager node.
 
     ```bash
-    ubuntu@manager:~$ docker swarm leave --force
+    (manager)$ docker swarm leave --force
     ```
 
 ## Metis: RL model training for the real-world LRA cluster
