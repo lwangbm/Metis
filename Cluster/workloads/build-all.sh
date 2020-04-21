@@ -6,5 +6,5 @@ for folder in redis mxnet-model-server isr checksum ycsb-memcached scenedetect; 
 done
 
 cd nginx
-docker build -t "nginx"
+docker build -t "nginx" .
 cd ..
