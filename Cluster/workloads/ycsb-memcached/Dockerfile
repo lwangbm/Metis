@@ -1,21 +1,20 @@
-FROM ubuntu:18.04
+FROM maven:3.6.3-jdk-8
 
 RUN apt-get update && \
     apt-get install -y \
-    openjdk-8-jre-headless \
-    python \
+    python3 \
+    python3-pip \
     vim \
     git \
     tar \
+    netcat \
     iputils-ping \
-    maven \
-    default-jdk \
-    netcat
+    memcached
 
 WORKDIR /
-RUN git clone http://github.com/brianfrankcooper/YCSB.git
-RUN cd YCSB
-RUN mvn -pl com.yahoo.ycsb:memcached-binding -am clean package
+RUN git clone https://github.com/brianfrankcooper/YCSB.git
+WORKDIR /YCSB
+RUN mvn -pl site.ycsb:memcached-binding -am clean package
 
 COPY memcached.conf /etc/memcached.conf
 
