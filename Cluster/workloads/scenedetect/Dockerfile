@@ -7,10 +7,12 @@ RUN apt-get update && \
     vim \
     redis-server
 
-RUN pip3 install opencv-python scenedetect
+RUN pip3 install opencv-python scenedetect aiohttp
 RUN apt-get install -y libxext6 libxrender-dev
 RUN pip3 install redis requests python-memcached
+RUN apt-get install -y libsm6
 
+COPY hiking.mp4 /
 COPY docker-entrypoint.sh /
 COPY aiohttp-scenedetect.py /
 RUN chmod +x /docker-entrypoint.sh

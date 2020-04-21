@@ -7,7 +7,7 @@ RUN apt-get update && \
     vim \
     redis-server
 
-RUN pip3 install redis requests python-memcached
+RUN pip3 install redis requests python-memcached aiohttp
 
 COPY docker-entrypoint.sh /
 COPY aiohttp-checksum.py /
