@@ -302,3 +302,17 @@ Paragon is re-implemented in Python. For the sake of fair comparison, we feed it
     ```
 
 # References
+
+[1] Medea: Panagiotis Garefalakis, Konstantinos Karanasos, Peter Pietzuch, Arun Suresh, and Sriram Rao. 2018. Medea: scheduling of long running applications in shared production clusters. In Proceedings of the Thirteenth EuroSys Conference (EuroSys ’18). Association for Computing Machinery, New York, NY, USA, Article 4, 1–13. DOI:https://doi.org/10.1145/3190508.3190549
+
+[2] Paragon: Christina Delimitrou and Christos Kozyrakis. 2013. Paragon: QoS-aware scheduling for heterogeneous datacenters. In Proceedings of the eighteenth international conference on Architectural support for programming languages and operating systems (ASPLOS ’13). Association for Computing Machinery, New York, NY, USA, 77–88. DOI:https://doi.org/10.1145/2451116.2451125
+
+[3] Redis: an open source, in-memory data structure store. https://redis.io
+
+[4] Model Server for Apache MXNet. https://github.com/awslabs/mxnet-model-server
+
+[5] Image Super Resolution. https://github.com/idealo/image-super-resolution
+
+[6] Locust: an open source load testing tool. https://locust.io
+
+[7] Yahoo! Cloud Streaming Benchmark: Brian F. Cooper, Adam Silberstein, Erwin Tam, Raghu Ramakrishnan, and Russell Sears. 2010. Benchmarking cloud serving systems with YCSB. In Proceedings of the 1st ACM symposium on Cloud computing (SoCC ’10). Association for Computing Machinery, New York, NY, USA, 143–154. DOI:https://doi.org/10.1145/1807128.1807152
