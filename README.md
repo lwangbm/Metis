@@ -4,7 +4,8 @@ Metis: Learning to Schedule Long-Running Applications in Shared Container Cluste
 
 
 This repository contains the tensorflow implementation for reinforcement learning based Long Running Application scheduling with Hierarchical Reinforcement Learning (HRL). 
-[DOI](10.5281/zenodo.3859335)
+
+[![DOI](10.5281/zenodo.3859335)](10.5281/zenodo.3859335)
 
 
 ## Dependencies
