@@ -1,0 +1,223 @@
++ env
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LANG=C.UTF-8
+SUDO_GID=1000
+USERNAME=root
+SUDO_COMMAND=/bin/su
+USER=root
+PWD=/home/ubuntu
+HOME=/root
+SUDO_USER=ubuntu
+SUDO_UID=1000
+MAIL=/var/mail/root
+SHELL=/bin/bash
+TERM=xterm-256color
+SHLVL=1
+LOGNAME=root
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+LESSOPEN=| /usr/bin/lesspipe %s
+_=/usr/bin/env
+
++ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.2 LTS
+Release:    18.04
+Codename:   bionic
+
++ uname -a
+Linux ip-172-31-24-74 4.15.0-1047-aws #49-Ubuntu SMP Fri Aug 23 09:02:45 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
++ lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              16
+On-line CPU(s) list: 0-15
+Thread(s) per core:  2
+Core(s) per socket:  8
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               85
+Model name:          Intel(R) Xeon(R) Platinum 8175M CPU @ 2.50GHz
+Stepping:            4
+CPU MHz:             3128.151
+BogoMIPS:            4999.99
+Hypervisor vendor:   KVM
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            1024K
+L3 cache:            33792K
+NUMA node0 CPU(s):   0-15
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single pti fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves ida arat pku ospke
+
++ cat /proc/meminfo
+MemTotal:       64461756 kB
+MemFree:        62642612 kB
+MemAvailable:   63351244 kB
+Buffers:           37508 kB
+Cached:          1210092 kB
+SwapCached:            0 kB
+Active:           713212 kB
+Inactive:         717208 kB
+Active(anon):     183452 kB
+Inactive(anon):      208 kB
+Active(file):     529760 kB
+Inactive(file):   717000 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:             38084 kB
+Writeback:             0 kB
+AnonPages:        182956 kB
+Mapped:           210256 kB
+Shmem:               844 kB
+Slab:             194056 kB
+SReclaimable:      91088 kB
+SUnreclaim:       102968 kB
+KernelStack:        6656 kB
+PageTables:        10208 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    32230876 kB
+Committed_AS:    1529872 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      192484 kB
+DirectMap2M:     6666240 kB
+DirectMap1G:    58720256 kB
+
++ inxi -F -c0
+System:    Host: ip-172-31-24-74 Kernel: 4.15.0-1047-aws x86_64 bits: 64 Console: tty 0
+           Distro: Ubuntu 18.04.2 LTS
+Machine:   Device: kvm System: Amazon EC2 product: m5.4xlarge serial: N/A
+           Mobo: Amazon EC2 model: N/A serial: N/A BIOS: Amazon EC2 v: 1.0 date: 10/16/2017
+CPU:       8 core Intel Xeon Platinum 8175M (-MT-MCP-) cache: 33792 KB
+           clock speeds: max: 3146 MHz 1: 3121 MHz 2: 3115 MHz 3: 3103 MHz 4: 3132 MHz 5: 3139 MHz 6: 3102 MHz
+           7: 3146 MHz 8: 3108 MHz 9: 3104 MHz 10: 3102 MHz 11: 3132 MHz 12: 3099 MHz 13: 3100 MHz 14: 3125 MHz
+           15: 3101 MHz 16: 3100 MHz
+Graphics:  Card: Amazon.com Device 1111
+           Display Server: N/A driver: N/A tty size: 139x38 Advanced Data: N/A out of X
+Network:   Card: Amazon.com Elastic Network Adapter (ENA) driver: ena
+           IF: ens5 state: up speed: N/A duplex: N/A mac: 02:07:01:81:81:a6
+Drives:    HDD Total Size: 32.2GB (90.0% used)
+           ID-1: /dev/nvme0n1 model: Amazon_Elastic_Block_Store size: 32.2GB
+Partition: ID-1: / size: 30G used: 27G (94%) fs: ext4 dev: /dev/nvme0n1p1
+RAID:      No RAID devices: /proc/mdstat, md_mod kernel module present
+Sensors:   None detected - is lm-sensors installed and configured?
+Info:      Processes: 257 Uptime: 0 min Memory: 470.6/62950.9MB Init: systemd runlevel: 5
+           Client: Shell (bash) inxi: 2.3.56
+
++ lsblk -a
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0         7:0    0 93.9M  1 loop /snap/core/9066
+loop1         7:1    0   18M  1 loop /snap/amazon-ssm-agent/1455
+loop2         7:2    0 88.7M  1 loop /snap/core/7396
+loop3         7:3    0   18M  1 loop /snap/amazon-ssm-agent/1566
+loop4         7:4    0        0 loop
+loop5         7:5    0        0 loop
+loop6         7:6    0        0 loop
+loop7         7:7    0        0 loop
+nvme0n1     259:0    0   30G  0 disk
+└─nvme0n1p1 259:1    0   30G  0 part /
+
++ lshw -short -quiet -sanitize
+H/W path    Device   Class      Description
+===========================================
+                     system     m5.4xlarge
+/0                   bus        Motherboard
+/0/0                 memory     64KiB BIOS
+/0/4                 processor  Intel(R) Xeon(R) Platinum 8175M CPU @ 2.50GHz
+/0/1                 memory     61GiB System memory
+/0/100               bridge     440FX - 82441FX PMC [Natoma]
+/0/100/1             bridge     82371SB PIIX3 ISA [Natoma/Triton II]
+/0/100/1.3           generic    82371AB/EB/MB PIIX4 ACPI
+/0/100/3             display    VGA compatible controller
+/0/100/4             storage    Non-Volatile memory controller
+/0/100/5    ens5     network    Ethernet interface
+/1          docker0  network    Ethernet interface
+
++ lsmod
+Module                  Size  Used by
+ipt_MASQUERADE         16384  1
+nf_nat_masquerade_ipv4    16384  1 ipt_MASQUERADE
+nf_conntrack_netlink    40960  0
+nfnetlink              16384  2 nf_conntrack_netlink
+xfrm_user              32768  1
+xfrm_algo              16384  1 xfrm_user
+iptable_nat            16384  1
+nf_conntrack_ipv4      16384  3
+nf_defrag_ipv4         16384  1 nf_conntrack_ipv4
+nf_nat_ipv4            16384  1 iptable_nat
+xt_addrtype            16384  2
+iptable_filter         16384  1
+xt_conntrack           16384  1
+nf_nat                 32768  2 nf_nat_masquerade_ipv4,nf_nat_ipv4
+nf_conntrack          131072  7 xt_conntrack,nf_nat_masquerade_ipv4,nf_conntrack_ipv4,nf_nat,ipt_MASQUERADE,nf_nat_ipv4,nf_conntrack_netlink
+br_netfilter           24576  0
+bridge                155648  1 br_netfilter
+stp                    16384  1 bridge
+llc                    16384  2 bridge,stp
+aufs                  241664  0
+overlay                77824  0
+ppdev                  20480  0
+parport_pc             32768  0
+parport                49152  2 parport_pc,ppdev
+serio_raw              16384  0
+sch_fq_codel           20480  9
+ib_iser                49152  0
+rdma_cm                61440  1 ib_iser
+iw_cm                  45056  1 rdma_cm
+ib_cm                  53248  1 rdma_cm
+ib_core               225280  4 rdma_cm,iw_cm,ib_iser,ib_cm
+iscsi_tcp              20480  0
+libiscsi_tcp           20480  1 iscsi_tcp
+libiscsi               53248  3 libiscsi_tcp,iscsi_tcp,ib_iser
+scsi_transport_iscsi    98304  3 iscsi_tcp,ib_iser,libiscsi
+ip_tables              28672  2 iptable_filter,iptable_nat
+x_tables               40960  5 xt_conntrack,iptable_filter,ipt_MASQUERADE,xt_addrtype,ip_tables
+autofs4                40960  2
+btrfs                1138688  0
+zstd_compress         163840  1 btrfs
+raid10                 53248  0
+raid456               147456  0
+async_raid6_recov      20480  1 raid456
+async_memcpy           16384  2 raid456,async_raid6_recov
+async_pq               16384  2 raid456,async_raid6_recov
+async_xor              16384  3 async_pq,raid456,async_raid6_recov
+async_tx               16384  5 async_pq,async_memcpy,async_xor,raid456,async_raid6_recov
+xor                    24576  2 async_xor,btrfs
+raid6_pq              114688  4 async_pq,btrfs,raid456,async_raid6_recov
+libcrc32c              16384  3 nf_conntrack,nf_nat,raid456
+raid1                  40960  0
+raid0                  20480  0
+multipath              16384  0
+linear                 16384  0
+crct10dif_pclmul       16384  0
+crc32_pclmul           16384  0
+ghash_clmulni_intel    16384  0
+pcbc                   16384  0
+aesni_intel           188416  0
+aes_x86_64             20480  1 aesni_intel
+crypto_simd            16384  1 aesni_intel
+glue_helper            16384  1 aesni_intel
+cryptd                 24576  3 crypto_simd,ghash_clmulni_intel,aesni_intel
+ena                    94208  0
